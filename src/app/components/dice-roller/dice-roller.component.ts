@@ -23,11 +23,11 @@ export class DiceRollerComponent implements OnInit {
 
   generateRandomNumber(min, max){
     return Math.floor(Math.random() * (max - min) + min);
-}
-storeHistory(currentRoll): void {
-  this.rollHistory.push(currentRoll)
-}
+  }
 
-rollQueue(): void {}
+  storeHistory(currentRoll): void {
+    this.rollHistory.push(currentRoll)
+  }
+
 }
 
