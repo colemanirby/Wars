@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class DiceRollerComponent implements OnInit {
 
   public currentRoll = 0;
+  public rollHistory = [];
   constructor() { }
 
   ngOnInit(): void {
@@ -16,10 +17,17 @@ export class DiceRollerComponent implements OnInit {
   rollDice(): void {
 
     this.currentRoll = this.generateRandomNumber(1,21);
+    this.storeHistory(this.currentRoll)
   }
 
 
   generateRandomNumber(min, max){
     return Math.floor(Math.random() * (max - min) + min);
 }
+storeHistory(currentRoll): void {
+  this.rollHistory.push(currentRoll)
 }
+
+rollQueue(): void {}
+}
+
