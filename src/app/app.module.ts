@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DiceRollerComponent } from './components/dice-roller/dice-roller.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DiceRollerComponent
   ],
   imports: [
     BrowserModule,
