@@ -1,5 +1,8 @@
 <button (click)="rollDice()">Clickbait</button>
-<div>{{currentRoll}}</div>
+<div class = 'roll'>{{currentRoll}}</div>
 <div>
-    <li *ngFor="let roll of rollHistory">{{this.roll}}</li>
+    <div>
+        <h6>Roll History</h6>
+        <div class= 'roll-history' *ngFor="let roll of rollHistoryDisplay">{{this.roll}}</div>
+    </div>
 </div>
