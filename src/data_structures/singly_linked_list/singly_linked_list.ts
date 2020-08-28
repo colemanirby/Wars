@@ -55,8 +55,14 @@ export class LinkedList<T> {
     }
 
     public removeLast(): T | null {
+
+        if (this.isEmpty) {
+            return null; 
+         }
+
         var finalNode = this.head.next;
         var previousNode;
+
         while(finalNode.next !== this.tail) {
             previousNode = finalNode;
             finalNode = finalNode.next
@@ -64,7 +70,7 @@ export class LinkedList<T> {
 
         previousNode.next = this.tail;
         finalNode.next = null;
-        return null;
+        return finalNode.value;
     }
 
     public remove(searchKey: T): T | null {

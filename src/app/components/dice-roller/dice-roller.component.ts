@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LinkedList} from '../../../data_structures/singly_linked_list/singly_linked_list'
-import {Node} from '../../../data_structures/singly_linked_list/node'
+import { DiceComponent } from './dice/dice.component';
 
 @Component({
   selector: 'dice-roller',
@@ -9,45 +9,55 @@ import {Node} from '../../../data_structures/singly_linked_list/node'
 })
 export class DiceRollerComponent implements OnInit {
 
-  public currentRoll = 0;
   public rollHistoryDisplay = [];
-  public rollHistoryLinked = new LinkedList();
-  constructor() { }
+  public rollHistoryLinked = new LinkedList<number>();
+
+  public diceCollection:DiceComponent[] = [];
+
+  public amIRollingBro = false;
+
+  constructor() { 
+    this.diceCollection.push(new DiceComponent(6));
+  }
 
   ngOnInit(): void {
   }
 
   async rollDice() {
+    this.amIRollingBro = true;
 
-    for(var i=0; i<10; i++) {
-      this.currentRoll = this.generateRandomNumber(1,21)
-      await this.delay(100);
+    this.diceCollection.forEach(dice => dice.roll());
+
+
+    // this.storeHistory(this.currentRoll);
+
+    this.amIRollingBro = false;
+  }
+
+  public addDie(faceValue: number): void {
+    this.diceCollection.push(new DiceComponent(faceValue))
+  }
+
+    deleteDie(dice: DiceComponent): void {
+      this.diceCollection = this.diceCollection.filter(currentDie => {
+        return dice !== currentDie;
+      })
     }
 
-    this.currentRoll = this.generateRandomNumber(1,21);
-    this.storeHistory(this.currentRoll)
-  }
-
-
-  generateRandomNumber(min, max): number{
-    return Math.floor(Math.random() * (max - min) + min);
-  }
-
-  storeHistory(currentRoll): void {
-    if(this.rollHistoryLinked.length() >= 4) {
-      this.rollHistoryLinked.removeLast();
-      this.rollHistoryLinked.insertFirst(currentRoll);
-    } else {
-      this.rollHistoryLinked.insertFirst(currentRoll);
+    deleteAllDice(): void {
+      this.diceCollection = []
     }
-    console.log('added new node');
-    this.rollHistoryLinked.listContents()
-    this.rollHistoryDisplay = this.rollHistoryLinked.getList();
-  }
-  
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-  }
+
+  // storeHistory(currentRoll): void {
+  //   if(this.rollHistoryLinked.length() >= 4) {
+  //     this.rollHistoryLinked.removeLast();
+  //     this.rollHistoryLinked.insertFirst(currentRoll);
+  //   } else {
+  //     this.rollHistoryLinked.insertFirst(currentRoll);
+  //   }
+  //   this.rollHistoryDisplay = this.rollHistoryLinked.getList();
+  // }
+
 }
 
 

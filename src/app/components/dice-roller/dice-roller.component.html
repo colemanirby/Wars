@@ -1,8 +1,22 @@
-<button (click)="rollDice()">Clickbait</button>
-<div class = 'roll'>{{currentRoll}}</div>
+<button (click)="rollDice()" [disabled] = "amIRollingBro" >Roll Dice</button>
+<button (click)="deleteAllDice()">Delete Dice</button>
+<div class = 'roll'>
+    <div *ngFor="let dice of diceCollection">
+        {{dice.currentRoll}} {{dice.faceType}} 
+        <button (click)="deleteDie(dice)">delete</button>
+    </div>
+</div>
 <div>
     <div>
+        <button (click)="addDie(4)">4</button>
+        <button (click)="addDie(6)">6</button>
+        <button (click)="addDie(8)">8</button>
+        <button (click)="addDie(10)">10</button>
+        <button (click)="addDie(12)">12</button>
+        <button (click)="addDie(20)">20</button>
+    </div>
+    <!-- <div>
         <h6>Roll History</h6>
         <div class= 'roll-history' *ngFor="let roll of rollHistoryDisplay">{{this.roll}}</div>
-    </div>
+    </div> -->
 </div>
