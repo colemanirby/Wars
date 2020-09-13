@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { CompileTemplateMetadata } from '@angular/compiler';
+import { Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs';
 import {LinkedList} from '../../../data_structures/singly_linked_list/singly_linked_list'
 import { DiceComponent } from './dice/dice.component';
 
@@ -9,12 +11,11 @@ import { DiceComponent } from './dice/dice.component';
 })
 export class DiceRollerComponent implements OnInit {
 
-  public rollHistoryDisplay = [];
-  public rollHistoryLinked = new LinkedList<number>();
+  
 
   public diceCollection:DiceComponent[] = [];
 
-  public amIRollingBro = false;
+  amIRollingBro: boolean = false;
 
   constructor() { 
     this.diceCollection.push(new DiceComponent(6));
@@ -23,19 +24,38 @@ export class DiceRollerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async rollDice() {
+  rollDice() {
     this.amIRollingBro = true;
+    const diceRollerStream = new Observable(() => {
+      this.diceCollection.forEach((die) => {
+        die.roll();
+      });
+    });
 
-    this.diceCollection.forEach(dice => dice.roll());
-
-
-    // this.storeHistory(this.currentRoll);
-
+    const newRolls = diceRollerStream.subscribe();
+   
+    // Stop listening for die after 2.5 seconds
+    setTimeout(() => {
+      newRolls.unsubscribe();
+      let newDiceCollection = []
+      this.diceCollection.forEach(dice => {
+      newDiceCollection.push(dice);
+    })
+    this.diceCollection = newDiceCollection;
     this.amIRollingBro = false;
+    }, 2500);
+
   }
 
   public addDie(faceValue: number): void {
-    this.diceCollection.push(new DiceComponent(faceValue))
+
+    let collectionIsValid = this.validateDicePool(faceValue);
+ 
+    if(collectionIsValid) {
+      this.diceCollection.push(new DiceComponent(faceValue))
+    }
+    
+
   }
 
     deleteDie(dice: DiceComponent): void {
@@ -48,15 +68,31 @@ export class DiceRollerComponent implements OnInit {
       this.diceCollection = []
     }
 
-  // storeHistory(currentRoll): void {
-  //   if(this.rollHistoryLinked.length() >= 4) {
-  //     this.rollHistoryLinked.removeLast();
-  //     this.rollHistoryLinked.insertFirst(currentRoll);
-  //   } else {
-  //     this.rollHistoryLinked.insertFirst(currentRoll);
-  //   }
-  //   this.rollHistoryDisplay = this.rollHistoryLinked.getList();
-  // }
+    validateDicePool(faceValue: number): boolean {
+      let isCollectionValid = true;
+      
+      let collectionSize = this.diceCollection.length;
+      let faceValues = 0;
+
+      for(let die of this.diceCollection) {
+
+        faceValues = faceValues + die.faceValue;
+
+      }
+
+      faceValues = faceValues + faceValue;
+
+      if (collectionSize === 3) {
+        alert("Max dice pool cannot exceed 3 dice");
+        isCollectionValid = false;
+      } else if (faceValues > 24) {
+        alert("Dice values cannot exceed 24")
+        isCollectionValid = false;
+      }
+
+      return isCollectionValid;
+
+    }
 
 }
 

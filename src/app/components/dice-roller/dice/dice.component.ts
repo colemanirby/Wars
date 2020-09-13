@@ -1,11 +1,10 @@
-
 export class DiceComponent {
   
-  public faceValue;
+  public faceValue: number;
 
-  public faceType;
+  public faceType: string;
 
-  public currentRoll = 0;
+  public currentRoll: number = 0;
 
   constructor(type: number) {
 
@@ -21,9 +20,9 @@ export class DiceComponent {
     //  for loop is used to display the random numbers to the user to simulate dice rolling
      for(var i=0; i<20; i++) {
       this.currentRoll = this.generateRandomNumber(1,this.faceValue + 1)
-      await this.delay(50);
+      let offsetTime = this.generateRandomNumber(1, 101);
+      await this.delay(50 + offsetTime);
     }
-    
     this.currentRoll = this.generateRandomNumber(1,this.faceValue + 1);
   }
 

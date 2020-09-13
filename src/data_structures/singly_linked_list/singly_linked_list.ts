@@ -131,7 +131,7 @@ export class LinkedList<T> {
         return this.size;
     }
 
-    public getList(): number[] {
+    public getList(): T[] {
         var list = [];
         if(this.isEmpty()) {
             return list;
