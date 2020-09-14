@@ -16,18 +16,33 @@ export class RollHistoryComponent implements OnInit, OnChanges{
 
   public rollHistoryDisplay: number[][] = [[]];
   public rollHistoryLinked = new LinkedList<DiceComponent[]>();
+  private initialized = false;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log('info')
   }
 
   ngOnChanges(): void {
-    this.storeHistory(this.diceCollection);
+    if(this.initialized && this.diceCollection.length > 0) {
+      let newDiceArray = this.createNewDiceArray();
+      this.storeHistory(newDiceArray);
+    } else {
+      this.initialized = true;
+    }
+
   }
 
-  storeHistory(diceCollection): void {
+  createNewDiceArray() {
+    const newDiceArray:DiceComponent[] = []
+    this.diceCollection.forEach(die => {
+      newDiceArray.push(Object.assign({}, die));
+    })
+
+    return newDiceArray;
+  }
+
+  storeHistory(diceCollection: DiceComponent[]): void {
     if(this.rollHistoryLinked.length() >= 4) {
       this.rollHistoryLinked.removeLast();
       this.rollHistoryLinked.insertFirst(diceCollection);
@@ -47,14 +62,13 @@ export class RollHistoryComponent implements OnInit, OnChanges{
     for (let dieArray of linkedListArray){
       for (let diceComponent of dieArray) {
 
-        innerNumberArray.push(diceComponent.currentRoll);
+        innerNumberArray.push(" "+diceComponent.currentRoll + " "+ diceComponent.faceType+" ");
 
       }
-
+      outterArray.push("["+innerNumberArray+"]");
+      innerNumberArray = [];
     }
-    
-    outterArray.push(innerNumberArray);
-
+        
     return outterArray;
  
   }

@@ -16,7 +16,7 @@ export class DiceComponent {
   ngOnInit(): void {
   }
 
- async roll() {
+ async roll(): Promise<void> {
     //  for loop is used to display the random numbers to the user to simulate dice rolling
      for(var i=0; i<20; i++) {
       this.currentRoll = this.generateRandomNumber(1,this.faceValue + 1)
@@ -24,6 +24,7 @@ export class DiceComponent {
       await this.delay(50 + offsetTime);
     }
     this.currentRoll = this.generateRandomNumber(1,this.faceValue + 1);
+    return Promise.resolve();
   }
 
   generateRandomNumber(min, max): number{

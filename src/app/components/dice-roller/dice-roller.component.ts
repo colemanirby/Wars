@@ -1,7 +1,9 @@
 import { CompileTemplateMetadata } from '@angular/compiler';
 import { Component, OnInit} from '@angular/core';
-import { Observable } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
+import { from, Observable } from 'rxjs';
 import {LinkedList} from '../../../data_structures/singly_linked_list/singly_linked_list'
+import { DiceService } from './dice.service';
 import { DiceComponent } from './dice/dice.component';
 
 @Component({
@@ -14,36 +16,38 @@ export class DiceRollerComponent implements OnInit {
   
 
   public diceCollection:DiceComponent[] = [];
+  private diceService: DiceService;
+  public outputDiceCollection: DiceComponent[] = [];
 
   amIRollingBro: boolean = false;
 
-  constructor() { 
-    this.diceCollection.push(new DiceComponent(6));
+  constructor(diceService: DiceService) { 
+    this.diceCollection.push(new DiceComponent(6))
+    this.diceService = diceService;
   }
 
   ngOnInit(): void {
   }
 
-  rollDice() {
-    this.amIRollingBro = true;
-    const diceRollerStream = new Observable(() => {
-      this.diceCollection.forEach((die) => {
-        die.roll();
-      });
-    });
+  updateDice(): DiceComponent[] {
+    let newDiceArray = []
+    for(let die of this.diceCollection) {
+      newDiceArray.push(die);
+    }
+    return newDiceArray;
+  }
 
-    const newRolls = diceRollerStream.subscribe();
-   
-    // Stop listening for die after 2.5 seconds
-    setTimeout(() => {
-      newRolls.unsubscribe();
-      let newDiceCollection = []
-      this.diceCollection.forEach(dice => {
-      newDiceCollection.push(dice);
-    })
-    this.diceCollection = newDiceCollection;
-    this.amIRollingBro = false;
-    }, 2500);
+  async rollDice() {
+
+    this.amIRollingBro = true;
+
+    let promiseArray = this.diceService.rollDice(this.diceCollection);
+
+    await Promise.all(promiseArray).then(() => {
+      this.amIRollingBro = false;
+      this.diceCollection = this.updateDice();
+      this.outputDiceCollection = this.diceCollection;
+    });
 
   }
 
@@ -52,9 +56,8 @@ export class DiceRollerComponent implements OnInit {
     let collectionIsValid = this.validateDicePool(faceValue);
  
     if(collectionIsValid) {
-      this.diceCollection.push(new DiceComponent(faceValue))
+      this.diceCollection.push(new DiceComponent(faceValue));
     }
-    
 
   }
 
@@ -75,9 +78,7 @@ export class DiceRollerComponent implements OnInit {
       let faceValues = 0;
 
       for(let die of this.diceCollection) {
-
         faceValues = faceValues + die.faceValue;
-
       }
 
       faceValues = faceValues + faceValue;
