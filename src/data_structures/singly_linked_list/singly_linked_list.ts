@@ -56,7 +56,7 @@ export class LinkedList<T> {
 
     public removeLast(): T | null {
 
-        if (this.isEmpty) {
+        if (this.isEmpty()) {
             return null; 
          }
 
@@ -70,7 +70,10 @@ export class LinkedList<T> {
 
         previousNode.next = this.tail;
         finalNode.next = null;
-        return finalNode.value;
+        let returnNode = finalNode;
+        finalNode = null;
+        this.size--;
+        return returnNode.value;
     }
 
     public remove(searchKey: T): T | null {

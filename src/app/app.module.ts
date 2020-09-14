@@ -12,7 +12,6 @@ import { RollHistoryComponent } from './components/dice-roller/roll-history/roll
     AppComponent,
     DiceRollerComponent,
     RollHistoryComponent
-    
   ],
   imports: [
     BrowserModule,
