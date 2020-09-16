@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
 import { DiceComponent } from './dice/dice.component';
 
 @Injectable({
@@ -14,8 +13,8 @@ export class DiceService {
     let promiseArray: Promise<void>[] = [];
     
     dice.forEach(die => {
-        let another = Promise.resolve(die.roll());
-        promiseArray.push(another);
+        let dieRollPromise = Promise.resolve(die.roll());
+        promiseArray.push(dieRollPromise);
     });
     
     return promiseArray;

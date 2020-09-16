@@ -1,8 +1,4 @@
-import { CompileTemplateMetadata } from '@angular/compiler';
 import { Component, OnInit} from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { from, Observable } from 'rxjs';
-import {LinkedList} from '../../../data_structures/singly_linked_list/singly_linked_list'
 import { DiceService } from './dice.service';
 import { DiceComponent } from './dice/dice.component';
 
