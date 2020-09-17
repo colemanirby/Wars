@@ -10,6 +10,6 @@
 .die{
     width: 2%;
     margin: 0;
-    float: left;
+    display: inline-block;
 }
     
