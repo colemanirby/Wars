@@ -6,3 +6,10 @@
 .roll {
     font-size: xx-large;
 }
+
+.die{
+    width: 2%;
+    margin: 0;
+    float: left;
+}
+    
