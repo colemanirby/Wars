@@ -11,7 +11,7 @@ export class DicePoolComponent implements OnInit {
   public diceCollection:DiceComponent[] = [];
 
   @Output()
-  diceUpdate = new EventEmitter<DiceComponent[]>()
+  public diceUpdate = new EventEmitter<DiceComponent[]>();
 
 
   areDiceRolling: boolean = false;
@@ -42,7 +42,6 @@ export class DicePoolComponent implements OnInit {
       this.diceCollection = this.updateDice();
       this.diceUpdate.emit(this.diceCollection);
     });
-
   }
 
   buildDicePromiseArray(): Promise<void>[] {

@@ -12,8 +12,6 @@ export class RollHistoryComponent implements OnInit, OnChanges{
   @Input()
   diceCollection: DiceComponent[];
 
-  history: number
-
   public rollHistoryDisplay: number[][] = [[]];
   public rollHistoryLinked = new LinkedList<DiceComponent[]>();
   private initialized = false;
