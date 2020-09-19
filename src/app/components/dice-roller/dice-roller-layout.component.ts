@@ -10,15 +10,11 @@ export class DiceRollerComponent implements OnInit {
 
   public outputDiceCollection: DiceComponent[] = [];
 
-  amIRollingBro: boolean = false;
-
   ngOnInit(): void {
   }
 
   updateDiceHistory(updatedDice: DiceComponent[]): void {
-
     this.outputDiceCollection = updatedDice;
-
   }
   
 }

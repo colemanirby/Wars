@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { DiceService } from '../dice.service';
 import { DiceComponent } from '../dice/dice.component';
 
 @Component({
@@ -10,8 +9,6 @@ import { DiceComponent } from '../dice/dice.component';
 export class DicePoolComponent implements OnInit {
 
   public diceCollection:DiceComponent[] = [];
-  private diceService: DiceService;
-  public outputDiceCollection: DiceComponent[] = [];
 
   @Output()
   diceUpdate = new EventEmitter<DiceComponent[]>()
@@ -19,9 +16,8 @@ export class DicePoolComponent implements OnInit {
 
   amIRollingBro: boolean = false;
 
-  constructor(diceService: DiceService) { 
+  constructor() { 
     this.diceCollection.push(new DiceComponent(6))
-    this.diceService = diceService;
   }
 
   ngOnInit(): void {
@@ -39,14 +35,26 @@ export class DicePoolComponent implements OnInit {
 
     this.amIRollingBro = true;
 
-    let promiseArray = this.diceService.rollDice(this.diceCollection);
+    let promiseArray = this.buildDicePromiseArray()
 
     await Promise.all(promiseArray).then(() => {
       this.amIRollingBro = false;
       this.diceCollection = this.updateDice();
-      this.outputDiceCollection = this.diceCollection;
-      this.diceUpdate.emit(this.outputDiceCollection);
+      this.diceUpdate.emit(this.diceCollection);
     });
+
+  }
+
+  buildDicePromiseArray(): Promise<void>[] {
+
+    let promiseArray: Promise<void>[] = [];
+    
+    this.diceCollection.forEach(die => {
+        let dieRollPromise = Promise.resolve(die.roll());
+        promiseArray.push(dieRollPromise);
+    });
+    
+    return promiseArray;
 
   }
 
