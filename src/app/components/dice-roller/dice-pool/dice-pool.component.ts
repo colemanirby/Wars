@@ -35,7 +35,7 @@ export class DicePoolComponent implements OnInit {
 
     this.amIRollingBro = true;
 
-    let promiseArray = this.buildDicePromiseArray()
+    let promiseArray = this.buildDicePromiseArray();
 
     await Promise.all(promiseArray).then(() => {
       this.amIRollingBro = false;
