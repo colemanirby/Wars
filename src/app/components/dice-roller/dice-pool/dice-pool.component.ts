@@ -14,7 +14,7 @@ export class DicePoolComponent implements OnInit {
   diceUpdate = new EventEmitter<DiceComponent[]>()
 
 
-  amIRollingBro: boolean = false;
+  areDiceRolling: boolean = false;
 
   constructor() { 
     this.diceCollection.push(new DiceComponent(6))
@@ -33,12 +33,12 @@ export class DicePoolComponent implements OnInit {
 
   async rollDice() {
 
-    this.amIRollingBro = true;
+    this.areDiceRolling = true;
 
     let promiseArray = this.buildDicePromiseArray();
 
     await Promise.all(promiseArray).then(() => {
-      this.amIRollingBro = false;
+      this.areDiceRolling = false;
       this.diceCollection = this.updateDice();
       this.diceUpdate.emit(this.diceCollection);
     });
