@@ -1,19 +1,21 @@
-import { Component, OnInit} from '@angular/core';
-import { DiceService } from './dice.service';
-import { DiceComponent } from './dice/dice.component';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { DiceService } from '../dice.service';
+import { DiceComponent } from '../dice/dice.component';
 
 @Component({
-  selector: 'dice-roller',
-  templateUrl: './dice-roller.component.html',
-  styleUrls: ['./dice-roller.component.css']
+  selector: 'dice-pool',
+  templateUrl: './dice-pool.component.html',
+  styleUrls: ['./dice-pool.component.css']
 })
-export class DiceRollerComponent implements OnInit {
-
-  
+export class DicePoolComponent implements OnInit {
 
   public diceCollection:DiceComponent[] = [];
   private diceService: DiceService;
   public outputDiceCollection: DiceComponent[] = [];
+
+  @Output()
+  diceUpdate = new EventEmitter<DiceComponent[]>()
+
 
   amIRollingBro: boolean = false;
 
@@ -43,6 +45,7 @@ export class DiceRollerComponent implements OnInit {
       this.amIRollingBro = false;
       this.diceCollection = this.updateDice();
       this.outputDiceCollection = this.diceCollection;
+      this.diceUpdate.emit(this.outputDiceCollection);
     });
 
   }
@@ -92,5 +95,3 @@ export class DiceRollerComponent implements OnInit {
     }
 
 }
-
-
