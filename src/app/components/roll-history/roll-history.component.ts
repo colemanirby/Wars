@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { LinkedList } from 'src/data_structures/singly_linked_list/singly_linked_list';
-import { DiceComponent } from '../dice/dice.component';
+import { DiceComponent } from '../../models/dice/dice.component';
 
 @Component({
   selector: 'roll-history',
@@ -66,9 +66,9 @@ export class RollHistoryComponent implements OnInit, OnChanges{
       outterArray.push("["+innerNumberArray+"]");
       innerNumberArray = [];
     }
-        
+
     return outterArray;
- 
+
   }
 
 }

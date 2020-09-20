@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { DiceComponent } from './dice/dice.component';
+import { DiceComponent } from '../../models/dice/dice.component';
 
 @Component({
   selector: 'character-game-layout',
@@ -16,7 +16,7 @@ export class CharacterGameLayoutComponent implements OnInit {
   updateDiceHistory(updatedDice: DiceComponent[]): void {
     this.outputDiceCollection = updatedDice;
   }
-  
+
 }
 
 

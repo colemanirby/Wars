@@ -5,7 +5,7 @@
 
 <div class = 'roll'>
     <div *ngFor="let dice of diceCollection">
-        {{dice.currentRoll}} {{dice.faceType}} 
+        {{dice.currentRoll}} {{dice.faceType}} {{dice.diceDisplay}}
         <button (click)="deleteDie(dice)">delete</button>
     </div>
 </div>

@@ -1,3 +1,5 @@
+import {DIE_STYLE} from './dice-styles.component'
+
 export class DiceComponent {
   
   public faceValue: number;
@@ -6,10 +8,18 @@ export class DiceComponent {
 
   public currentRoll: number = 0;
 
+  public diceStyleMap: Map<number, String>;
+
+  public diceDisplay: String;
+
   constructor(type: number) {
 
     this.faceValue = type;
     this.faceType = "D-"+type;
+
+    this.diceStyleMap = DIE_STYLE["D"+type.toString()+"_STYLES"];
+
+    this.diceDisplay = this.diceStyleMap[type];
 
    }
 

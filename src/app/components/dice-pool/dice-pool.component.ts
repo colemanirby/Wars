@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { DiceComponent } from '../dice/dice.component';
+import { DiceComponent } from '../../models/dice/dice.component';
 
 @Component({
   selector: 'dice-pool',
@@ -16,7 +16,7 @@ export class DicePoolComponent implements OnInit {
 
   areDiceRolling: boolean = false;
 
-  constructor() { 
+  constructor() {
     this.diceCollection.push(new DiceComponent(6))
   }
 
@@ -47,12 +47,12 @@ export class DicePoolComponent implements OnInit {
   buildDicePromiseArray(): Promise<void>[] {
 
     let promiseArray: Promise<void>[] = [];
-    
+
     this.diceCollection.forEach(die => {
         let dieRollPromise = Promise.resolve(die.roll());
         promiseArray.push(dieRollPromise);
     });
-    
+
     return promiseArray;
 
   }
@@ -60,7 +60,7 @@ export class DicePoolComponent implements OnInit {
   public addDie(faceValue: number): void {
 
     let collectionIsValid = this.validateDicePool(faceValue);
- 
+
     if(collectionIsValid) {
       this.diceCollection.push(new DiceComponent(faceValue));
     }
@@ -79,7 +79,7 @@ export class DicePoolComponent implements OnInit {
 
     validateDicePool(faceValue: number): boolean {
       let isCollectionValid = true;
-      
+
       let collectionSize = this.diceCollection.length;
       let faceValues = 0;
 
