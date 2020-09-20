@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { DiceComponent } from '../../models/dice/dice.component';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {DiceComponent} from '../../models/dice/dice.component';
 
 @Component({
   selector: 'dice-pool',
@@ -8,7 +8,7 @@ import { DiceComponent } from '../../models/dice/dice.component';
 })
 export class DicePoolComponent implements OnInit {
 
-  public diceCollection:DiceComponent[] = [];
+  public diceCollection: DiceComponent[] = [];
 
   @Output()
   public diceUpdate = new EventEmitter<DiceComponent[]>();
@@ -25,7 +25,7 @@ export class DicePoolComponent implements OnInit {
 
   updateDice(): DiceComponent[] {
     let newDiceArray = []
-    for(let die of this.diceCollection) {
+    for (let die of this.diceCollection) {
       newDiceArray.push(die);
     }
     return newDiceArray;
@@ -49,8 +49,8 @@ export class DicePoolComponent implements OnInit {
     let promiseArray: Promise<void>[] = [];
 
     this.diceCollection.forEach(die => {
-        let dieRollPromise = Promise.resolve(die.roll());
-        promiseArray.push(dieRollPromise);
+      let dieRollPromise = Promise.resolve(die.roll());
+      promiseArray.push(dieRollPromise);
     });
 
     return promiseArray;
@@ -61,44 +61,44 @@ export class DicePoolComponent implements OnInit {
 
     let collectionIsValid = this.validateDicePool(faceValue);
 
-    if(collectionIsValid) {
+    if (collectionIsValid) {
       this.diceCollection.push(new DiceComponent(faceValue));
     }
 
   }
 
-    deleteDie(dice: DiceComponent): void {
-      this.diceCollection = this.diceCollection.filter(currentDie => {
-        return dice !== currentDie;
-      })
+  deleteDie(dice: DiceComponent): void {
+    this.diceCollection = this.diceCollection.filter(currentDie => {
+      return dice !== currentDie;
+    })
+  }
+
+  deleteAllDice(): void {
+    this.diceCollection = []
+  }
+
+  validateDicePool(faceValue: number): boolean {
+    let isCollectionValid = true;
+
+    let collectionSize = this.diceCollection.length;
+    let faceValues = 0;
+
+    for (let die of this.diceCollection) {
+      faceValues = faceValues + die.faceValue;
     }
 
-    deleteAllDice(): void {
-      this.diceCollection = []
+    faceValues = faceValues + faceValue;
+
+    if (collectionSize === 3) {
+      alert("Max dice pool cannot exceed 3 dice");
+      isCollectionValid = false;
+    } else if (faceValues > 24) {
+      alert("Dice values cannot exceed 24")
+      isCollectionValid = false;
     }
 
-    validateDicePool(faceValue: number): boolean {
-      let isCollectionValid = true;
+    return isCollectionValid;
 
-      let collectionSize = this.diceCollection.length;
-      let faceValues = 0;
-
-      for(let die of this.diceCollection) {
-        faceValues = faceValues + die.faceValue;
-      }
-
-      faceValues = faceValues + faceValue;
-
-      if (collectionSize === 3) {
-        alert("Max dice pool cannot exceed 3 dice");
-        isCollectionValid = false;
-      } else if (faceValues > 24) {
-        alert("Dice values cannot exceed 24")
-        isCollectionValid = false;
-      }
-
-      return isCollectionValid;
-
-    }
+  }
 
 }

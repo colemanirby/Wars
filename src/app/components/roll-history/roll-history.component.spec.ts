@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RollHistoryComponent } from './roll-history.component';
+import {RollHistoryComponent} from './roll-history.component';
 
 describe('RollHistoryComponent', () => {
   let component: RollHistoryComponent;
@@ -8,9 +8,9 @@ describe('RollHistoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RollHistoryComponent ]
+      declarations: [RollHistoryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

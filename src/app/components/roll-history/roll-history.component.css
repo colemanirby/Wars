@@ -1,4 +1,8 @@
 .roll-history {
-    width: fit-content;
-    float: left;
+  width: fit-content;
+  float: left;
+}
+
+.roll-history-component {
+  text-align: center;
 }

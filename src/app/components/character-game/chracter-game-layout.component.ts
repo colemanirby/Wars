@@ -1,5 +1,5 @@
-import { Component, OnInit} from '@angular/core';
-import { DiceComponent } from '../../models/dice/dice.component';
+import {Component, OnInit} from '@angular/core';
+import {DiceComponent} from '../../models/dice/dice.component';
 
 @Component({
   selector: 'character-game-layout',

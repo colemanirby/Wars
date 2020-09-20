@@ -1,28 +1,29 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { LinkedList } from 'src/data_structures/singly_linked_list/singly_linked_list';
-import { DiceComponent } from '../../models/dice/dice.component';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {LinkedList} from 'src/data_structures/singly_linked_list/singly_linked_list';
+import {DiceComponent} from '../../models/dice/dice.component';
 
 @Component({
   selector: 'roll-history',
   templateUrl: './roll-history.component.html',
   styleUrls: ['./roll-history.component.css']
 })
-export class RollHistoryComponent implements OnInit, OnChanges{
+export class RollHistoryComponent implements OnInit, OnChanges {
 
   @Input()
   diceCollection: DiceComponent[];
 
-  public rollHistoryDisplay: number[][] = [[]];
+  public rollHistoryDisplay: String[][] = [[]];
   public rollHistoryLinked = new LinkedList<DiceComponent[]>();
   private initialized = false;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(): void {
-    if(this.initialized && this.diceCollection.length > 0) {
+    if (this.initialized && this.diceCollection.length > 0) {
       let newDiceArray = this.createNewDiceArray();
       this.storeHistory(newDiceArray);
     } else {
@@ -32,7 +33,7 @@ export class RollHistoryComponent implements OnInit, OnChanges{
   }
 
   createNewDiceArray() {
-    const newDiceArray:DiceComponent[] = []
+    const newDiceArray: DiceComponent[] = []
     this.diceCollection.forEach(die => {
       newDiceArray.push(Object.assign({}, die));
     })
@@ -41,7 +42,7 @@ export class RollHistoryComponent implements OnInit, OnChanges{
   }
 
   storeHistory(diceCollection: DiceComponent[]): void {
-    if(this.rollHistoryLinked.length() >= 4) {
+    if (this.rollHistoryLinked.length() >= 4) {
       this.rollHistoryLinked.removeLast();
       this.rollHistoryLinked.insertFirst(diceCollection);
     } else {
@@ -50,20 +51,20 @@ export class RollHistoryComponent implements OnInit, OnChanges{
     this.rollHistoryDisplay = this.getDiceHistoryDisplay();
   }
 
-  getDiceHistoryDisplay(): number[][] {
+  getDiceHistoryDisplay(): String[][] {
 
     let innerNumberArray = [];
     let outterArray = [];
 
     let linkedListArray = this.rollHistoryLinked.getList();
 
-    for (let dieArray of linkedListArray){
+    for (let dieArray of linkedListArray) {
       for (let diceComponent of dieArray) {
 
-        innerNumberArray.push(" "+diceComponent.currentRoll + " "+ diceComponent.faceType+" ");
+        innerNumberArray.push(diceComponent.diceDisplay);
 
       }
-      outterArray.push("["+innerNumberArray+"]");
+      outterArray.push(innerNumberArray);
       innerNumberArray = [];
     }
 

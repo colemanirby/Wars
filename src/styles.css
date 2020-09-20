@@ -1,2 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
-@import url(assets/fonts/dicefont/dicefont.css)
+@import url(assets/fonts/dicefont/dicefont.css);
+
+.d4 {
+  color: green;
+}
+
+.d6 {
+  color: crimson;
+}
+
+.d8 {
+  color: blue;
+}
+
+.d10 {
+  color: chocolate;
+}
+
+.d12 {
+  color: fuchsia;
+}
+
+.d20 {
+  color: purple;
+}

@@ -1,6 +1,10 @@
 <div>
-    <div>
-        <h6>Roll History</h6>
-        <div class= 'roll-history' *ngFor="let roll of rollHistoryDisplay">{{this.roll}}</div>
+  <div>
+    <h6>Roll History</h6>
+    <div class='roll-history' *ngFor="let roll of rollHistoryDisplay">
+      <div *ngFor="let rollDisplay of roll">
+        <div [ngClass]="rollDisplay" class="roll-history-component"></div>
+      </div>
     </div>
+  </div>
 </div>

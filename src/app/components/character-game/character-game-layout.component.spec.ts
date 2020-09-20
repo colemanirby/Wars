@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CharacterGameLayoutComponent } from './chracter-game-layout.component';
+import {CharacterGameLayoutComponent} from './chracter-game-layout.component';
 
 describe('DiceRollerComponent', () => {
   let component: CharacterGameLayoutComponent;
@@ -8,9 +8,9 @@ describe('DiceRollerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CharacterGameLayoutComponent ]
+      declarations: [CharacterGameLayoutComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

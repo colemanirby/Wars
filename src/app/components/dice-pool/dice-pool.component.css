@@ -1,10 +1,27 @@
 .roll {
-    font-size: xx-large;
+  font-size: xx-large;
 }
 
-.die{
-    width: 2%;
-    margin: 0;
-    display: inline-block;
+.die-add {
+  width: 2%;
+  margin: 0;
+  display: inline-block;
 }
-    
+
+.die-roll {
+  width: 2%;
+  padding: 1%;
+  display: inline-block;
+}
+
+.die-delete {
+  background: indianred;
+}
+
+.dice-pool {
+  text-align: center;
+}
+
+.add-dice {
+  padding: 1%
+}
