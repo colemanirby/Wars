@@ -6,6 +6,7 @@
   width: 2%;
   margin: 0;
   display: inline-block;
+  cursor: pointer;
 }
 
 .die-roll {

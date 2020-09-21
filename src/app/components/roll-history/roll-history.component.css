@@ -1,6 +1,5 @@
 .roll-history {
-  width: fit-content;
-  float: left;
+  display: inline-block;
 }
 
 .roll-history-component {
