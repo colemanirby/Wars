@@ -5,3 +5,10 @@
 .roll-history-component {
   text-align: center;
 }
+
+.roll-history-text {
+  font-family: "Bilbo Swash Caps", serif;
+  font-weight: bold;
+  font-size: xx-large;
+  margin: auto;
+}

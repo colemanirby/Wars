@@ -1,3 +1,22 @@
 .dice-component-styling {
   text-align: center;
 }
+
+.dice-pool{
+  display: inline-block;
+  justify-content:center;
+  align-items:center;
+  border: solid #4b4e56;
+}
+
+roll-history {
+  display: inline-block;
+  justify-content:center;
+  align-items:center;
+  border-right-style: solid;
+  border-right-color: #4b4e56;
+  border-left-style: solid;
+  border-left-color: #4b4e56;
+  border-bottom-style: solid;
+  border-bottom-color: #4b4e56;
+}

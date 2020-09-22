@@ -1,6 +1,10 @@
 <div>
-  <div class = "dice-component-styling">
-    <dice-pool (diceUpdate)="updateDiceHistory($event)"></dice-pool>
-    <roll-history [diceCollection]="outputDiceCollection"></roll-history>
+  <div class="dice-component-styling">
+    <div class="dice-pool">
+      <dice-pool (diceUpdate)="updateDiceHistory($event)"></dice-pool>
+    </div>
+    <div class="roll-history">
+      <roll-history [diceCollection]="outputDiceCollection"></roll-history>
+    </div>
   </div>
 </div>

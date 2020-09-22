@@ -13,6 +13,8 @@ export class DicePoolComponent implements OnInit {
   @Output()
   public diceUpdate = new EventEmitter<DiceComponent[]>();
 
+  public noDiceText = "No Dice";
+
 
   areDiceRolling: boolean = false;
 

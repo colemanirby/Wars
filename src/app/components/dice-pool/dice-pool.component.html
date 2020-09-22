@@ -1,17 +1,21 @@
 <div class="dice-pool">
   <div>
-    <button class = "button-styling" (click)="rollDice()" [disabled]="areDiceRolling">Roll Dice</button>
-    <button class = "button-styling" (click)="deleteAllDice()">Delete Dice</button>
+    <button class = "button-styling action-button" (click)="rollDice()" [disabled]="areDiceRolling">Roll Dice</button>
+    <button class = "button-styling action-button" (click)="deleteAllDice()">Delete Dice</button>
   </div>
 
   <div class='roll'>
-    <div *ngFor="let dice of diceCollection" class="die-roll">
-      <div [ngClass]="dice.diceDisplay"></div>
-      <button class="die-delete" (click)="deleteDie(dice)">x</button>
+    <div *ngIf="diceCollection.length > 0; else noDiceBlock">
+      <div *ngFor="let dice of diceCollection" class="die-roll">
+        <div [ngClass]="dice.diceDisplay"></div>
+        <button class="die-delete" (click)="deleteDie(dice)">x</button>
+      </div>
     </div>
+    <ng-template #noDiceBlock>{{noDiceText}}</ng-template>
+
   </div>
   <div>
-    <div>Add Dice</div>
+    <div class="add-dice-text">Add Dice</div>
     <div class="add-dice">
 
       <div class="df-d4-4 d4 die-add" (click)="addDie(4)"></div>

@@ -12,6 +12,8 @@ export class DiceComponent {
 
   public diceDisplay: String;
 
+  public hasBeenRolled: boolean = false;
+
   constructor(type: number) {
 
     this.faceValue = type;
@@ -36,6 +38,7 @@ export class DiceComponent {
     }
     this.currentRoll = this.generateRandomNumber(1, this.faceValue + 1);
     this.diceDisplay = this.diceStyleMap[this.currentRoll];
+    this.hasBeenRolled = true;
     return Promise.resolve();
   }
 

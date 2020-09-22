@@ -35,7 +35,9 @@ export class RollHistoryComponent implements OnInit, OnChanges {
   createNewDiceArray() {
     const newDiceArray: DiceComponent[] = []
     this.diceCollection.forEach(die => {
-      newDiceArray.push(Object.assign({}, die));
+      if(die.hasBeenRolled) {
+        newDiceArray.push(Object.assign({}, die));
+      }
     })
 
     return newDiceArray;

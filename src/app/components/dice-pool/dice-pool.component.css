@@ -3,7 +3,7 @@
 }
 
 .die-add {
-  width: 2%;
+  /*width: 2%;*/
   margin: 0;
   display: inline-block;
   cursor: pointer;
@@ -38,4 +38,16 @@
 
 .add-dice {
   padding: 1%
+}
+
+.add-dice-text {
+  font-family: "Bilbo Swash Caps", serif;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.action-button {
+
+  margin: 5px;
+
 }
