@@ -22,5 +22,23 @@
 }
 
 .d20 {
-  color: purple;
+  color: darkmagenta;
+}
+
+.button-styling {
+  border-radius: 12px;
+  box-shadow: 0 5px 12px 0 rgba(0,0,0,0.24), 0 1px 5px 0 rgba(0,0,0,0.19);
+  transition-duration: 0.2s;
+  outline: none;
+  padding: 5px;
+}
+.button-styling:hover {
+  background-color: darkgray; /* Green */
+  color: white;
+}
+
+.button-styling:active {
+  background-color: rgba(0,0,0,1);
+  box-shadow: rgba(0,0,0,1);
+  transform: translateY(4px);
 }
